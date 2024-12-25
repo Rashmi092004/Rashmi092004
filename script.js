@@ -1,33 +1,22 @@
-// Form Validation
-document.getElementById("registrationForm").addEventListener("submit", function(event) {
-    // Prevent form submission if validation fails
-    event.preventDefault();
+$(document).ready(function () {
+    // Dynamic Greeting
+    const now = new Date();
+    const hour = now.getHours();
+    let greeting = "Welcome!";
+    if (hour < 12) greeting = "Good Morning!";
+    else if (hour < 18) greeting = "Good Afternoon!";
+    else greeting = "Good Evening!";
+    $("#greeting").text(greeting);
 
-    // Get form elements
-    const fullName = document.getElementById("fullName").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const address = document.getElementById("address").value;
-    const education = document.getElementById("education").value;
-    const gender = document.querySelector('input[name="gender"]:checked');
-    const dob = document.getElementById("dob").value;
-    const position = document.getElementById("position").value;
+    // Toggle Theme
+    $("#theme-toggle").click(function () {
+        $("body").toggleClass("dark-theme");
+        const isDark = $("body").hasClass("dark-theme");
+        $(this).text(isDark ? "Switch to Light Theme" : "Switch to Dark Theme");
+    });
 
-    // Validation for empty fields
-    if (!fullName || !email || !phone || !address || !education || !gender || !dob || !position) {
-        alert("Please fill in all the required fields.");
-        return false;
-    }
-
-    // Gender validation
-    if (!gender) {
-        alert("Please select your gender.");
-        return false;
-    }
-
-    // If all fields are valid, show success message
-    alert("Your application has been successfully submitted!");
-
-    // Submit the form after validation
-    this.submit();
+    // Accordion
+    $(".accordion-item h2").click(function () {
+        $(this).next(".accordion-content").slideToggle();
+    });
 });
